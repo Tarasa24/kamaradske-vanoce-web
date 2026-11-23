@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tajný Ježíšek</title>
+<style>
+html,body{margin:0;height:100%;background:#f2e9de;overflow:hidden}
+body{display:flex;align-items:center;justify-content:center}
+#stage{position:fixed;left:0;top:0;width:100vw;height:100vh;height:100dvh;overflow:hidden;
+  user-select:none;-webkit-user-select:none}
+#stage img{position:absolute;display:block;max-width:none;pointer-events:none;-webkit-user-drag:none}
+#stage .el{position:absolute}
+#stage .el>img{left:0;top:0;width:100%;height:100%}
+#stage button.el,#stage a.el{padding:0;margin:0;border:0;background:transparent;cursor:pointer;display:block;-webkit-tap-highlight-color:transparent;outline:none}
+#stage button.el:focus-visible,#stage a.el:focus-visible{outline:3px solid #2c6552;outline-offset:4px;border-radius:14px}
+.grow{transition:transform .22s cubic-bezier(.3,1.5,.5,1);transform-origin:50% 50%}
+@media (hover:hover){.grow:hover{transform:scale(1.12)}}
+.grow:active{transform:scale(.97)}
+#list{position:absolute;inset:0;transition:opacity .6s ease}
+#list.off{opacity:0;pointer-events:none}
+#list.lock button{pointer-events:none}
+#doodles{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;pointer-events:none}
+#doodles.on{opacity:1}
+.dd{animation:float var(--dur,8s) ease-in-out var(--del,0s) infinite alternate;will-change:transform}
+@keyframes float{
+  from{transform:translate3d(calc(var(--ax,0)*var(--u)*-1),calc(var(--amp,8)*var(--u)*-1),0) rotate(calc(var(--rot,1.5deg)*-1))}
+  to{transform:translate3d(calc(var(--ax,0)*var(--u)),calc(var(--amp,8)*var(--u)),0) rotate(var(--rot,1.5deg))}}
+#cardwrap{position:absolute;inset:0;visibility:hidden;transform-origin:50% 20%;filter:drop-shadow(0 .5vmin 1.2vmin rgba(60,40,20,.14))}
+#cardwrap .fade{transition:opacity .35s ease;opacity:0}
+#cardwrap .fade.on{opacity:1}
+#confirmG,#drawG,#resultG,#backG{position:absolute;inset:0;pointer-events:none}
+#confirmG>*,#backG>*{pointer-events:auto}
+#drawG,#resultG{opacity:0;transition:opacity .45s ease}
+#drawG.on,#resultG.on{opacity:1}
+#confirmG{opacity:0;transition:opacity .4s ease}
+#confirmG.on{opacity:1}
+#backG{opacity:0;transition:opacity .8s ease;pointer-events:none}
+#backG.on{opacity:1}
+#backG.on>*{pointer-events:auto}
+.pop{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(.86);opacity:.2}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.dd{animation:none}.pop{animation:none}.grow{transition:none}}
+</style>
+</head>
+<body>
+<div id="stage" role="main">
+  <div id="list"></div>
+  <div id="doodles" aria-hidden="true"></div>
+  <div id="cardwrap">
+    <img id="card" alt="">
+    <div id="confirmG"></div>
+    <div id="drawG"></div>
+    <div id="resultG"></div>
+    <div id="headG"></div>
+    <div id="backG"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var NAMES=["Petr", "Klára", "Julie", "Jára", "Flori", "Máma", "Karolýna", "Jakub", "Aneta", "Štěpán"], DATA={"Aneta": "KA85BIE=", "Jakub": "KLn0H4U=", "Štěpán": "Mh8hHw==", "Flori": "KRsnAogJI/NK", "Petr": "L7n0AIU=", "Klára": "JBY6H40=", "Jára": "KRaWzJar", "Karolýna": "p9ohqX+6XTxF", "Julie": "KBs+GIY=", "Máma": "IxQwGYU="}, KEY_B64="YnpVbeTKnp0r33VVZkL6IaA1x2BUQ/dg", META={"nm0": [37.38, 143.25, 122.12, 35.25], "nm0_name": "Petr", "nm1": [47.25, 207.12, 97.88, 38.25], "nm1_name": "Flori", "nm2": [35.62, 282.0, 126.25, 33.88], "nm2_name": "Aneta", "nm3": [37.62, 354.88, 123.5, 35.0], "nm3_name": "Jára", "nm4": [23.5, 423.5, 142.62, 34.75], "nm4_name": "Štěpán", "nm5": [140.88, 180.62, 123.38, 35.0], "nm5_name": "Karolýna", "nm6": [127.25, 247.25, 142.25, 33.75], "nm6_name": "Julie", "nm7": [145.38, 313.12, 122.62, 34.88], "nm7_name": "Klára", "nm8": [155.62, 379.75, 106.75, 44.25], "nm8_name": "Máma", "nm9": [151.75, 455.62, 111.0, 40.62], "nm9_name": "Jakub", "lstatic": [26.12, 22.5, 239.5, 86.62], "card": [23.75, 43.38, 244.5, 343.75], "c_jsi": [106.0, 113.62, 80.62, 17.5], "c_no": [96.88, 306.0, 91.5, 17.62], "c_yes": [98.12, 251.88, 90.38, 34.88], "d_txt": [75.77, 114.48, 139.62, 209.97], "r_txt": [70.92, 114.48, 151.23, 213.16], "back": [48.65, 478.52, 194.22, 18.24], "dd": [["dd0", 45.1, 287.98, 30.32, 29.61], ["dd1", 102.18, 451.4, 13.03, 13.03], ["dd2", -15.06, 364.48, 148.27, 153.72], ["dd3", 220.61, -7.85, 25.58, 25.11], ["dd4", 268.21, 129.76, 11.37, 11.37], ["dd5", 157.84, 56.34, 136.9, 129.56], ["dd6", 16.68, -0.51, 144.95, 159.16], ["dd7", 238.13, 415.88, 67.98, 115.82], ["dd8", 250.69, 357.85, 31.03, 28.42], ["dd9", 258.5, 239.18, 47.61, 45.24], ["dd10", -15.06, 143.02, 41.45, 82.66]], "heads": {"Jára": {"tag": "0", "A": [111.65, 44.525, 65.95, 32.825], "B": [111.65, 44.525, 55.7, 32.825], "base": 73.25}, "Petr": {"tag": "1", "A": [109.65, 107.9, 73.45, 23.45], "B": [109.65, 108.525, 63.95, 21.825], "base": 129.3125}, "Julie": {"tag": "2", "A": [105.9, 163.4, 77.45, 25.325], "B": [105.9, 164.9, 66.95, 23.825], "base": 185.0}, "Klára": {"tag": "3", "A": [103.775, 240.025, 85.2, 30.95], "B": [103.775, 240.025, 75.075, 29.7], "base": 268.75}, "Máma": {"tag": "4", "A": [103.4, 374.275, 84.7, 30.95], "B": [103.4, 374.275, 74.45, 29.325], "base": 402.875}, "Aneta": {"tag": "5", "A": [101.65, 423.15, 88.45, 23.45], "B": [101.65, 424.025, 78.325, 21.575], "base": 444.875}, "Jakub": {"tag": "6", "A": [101.775, 477.9, 85.575, 25.2], "B": [101.775, 478.9, 75.2, 24.2], "base": 499.5}, "Štěpán": {"tag": "7", "A": [96.025, 513.15, 100.45, 30.95], "B": [96.025, 513.15, 89.95, 30.575], "base": 542.375}, "Karolýna": {"tag": "8", "A": [81.275, 320.9, 137.075, 30.95], "B": [81.275, 320.9, 126.825, 29.95], "base": 349.8125}, "Flori": {"tag": "f", "A": [98.275, 146.15, 96.325, 27.7], "B": [98.275, 147.65, 84.075, 24.95], "base": 171.25}}};
+  var BACK_URL="../";
+  var reduce=matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function reveal(name){var enc=atob(DATA[name]),key=atob(KEY_B64),b=new Uint8Array(enc.length);
+    for(var i=0;i<enc.length;i++)b[i]=enc.charCodeAt(i)^key.charCodeAt(i%key.length);return new TextDecoder("utf-8").decode(b);}
+
+  var stage=document.getElementById("stage"),list=document.getElementById("list"),dood=document.getElementById("doodles"),
+      wrap=document.getElementById("cardwrap"),confirmG=document.getElementById("confirmG"),drawG=document.getElementById("drawG"),
+      resultG=document.getElementById("resultG"),headG=document.getElementById("headG"),backG=document.getElementById("backG");
+  var WIDE=[0,0,292.5,525], win=WIDE;
+  var reg=[];   // [element, vb]
+  function pos(el,vb){reg.push([el,vb]);apply(el,vb);return el;}
+  function apply(el,v){el.style.left=((v[0]-win[0])/win[2]*100)+"%";el.style.top=((v[1]-win[1])/win[3]*100)+"%";
+    el.style.width=(v[2]/win[2]*100)+"%";el.style.height=(v[3]/win[3]*100)+"%";}
+  function layout(){
+    var vw=stage.clientWidth||innerWidth,vh=stage.clientHeight||innerHeight,ar=vw/vh,W=292.5,H=W/ar;if(H<525){H=525;W=H*ar;}win=[146.25-W/2,262.5-H/2,W,H];
+    stage.style.setProperty("--ar",(win[2]/win[3]).toFixed(4));
+    reg.forEach(function(r){apply(r[0],r[1]);});
+    stage.style.setProperty("--u",(stage.clientWidth/win[2])+"px");
+  }
+  function mk(tag,cls,parent){var e=document.createElement(tag);if(cls)e.className=cls;if(parent)parent.appendChild(e);return e;}
+  function imgEl(src,alt,parent){var i=mk("img",null,parent);i.src=src;i.alt=alt||"";i.draggable=false;return i;}
+  // statická ilustrace na pozici vb (vb = [x,y,w,h] v jednotkách návrhu)
+  function layer(key,parent,alt){var d=mk("div","el",parent);d.style.pointerEvents="none";imgEl("m/"+key+".svg",alt,d);return pos(d,META[key]);}
+  function ctl(key,parent,label,fn,tag){var b=mk(tag||"button","el grow",parent);if(b.tagName==="BUTTON")b.type="button";
+    b.setAttribute("aria-label",label);imgEl("m/"+key+".svg","",b);pos(b,META[key]);b.addEventListener("click",fn);return b;}
+
+  // ---------- seznam jmen ----------
+  layer("lstatic",list,"Tajný Ježíšek. Klikni na své jméno a zjisti, koho obdarováváš.");
+  var nameBtn={};
+  for(var i=0;i<10;i++){(function(i){var n=META["nm"+i+"_name"];nameBtn[n]=ctl("nm"+i,list,n,function(){ask(n);});})(i);}
+
+  // ---------- karta ----------
+  var card=document.getElementById("card");card.src="m/card.svg";card.style.pointerEvents="none";
+  var cardBox=mk("div","el",null);cardBox.style.display="none";
+  // card je <img> přímo ve wrapperu → umístíme ho přes pos
+  pos(card,META.card);
+  layer("c_jsi",confirmG,"Jsi opravdu");
+  var yesB=ctl("c_yes",confirmG,"Ano, to jsem já",function(){yes();});
+  var noB=ctl("c_no",confirmG,"Ne, zpět na seznam",function(){no();});
+  layer("d_txt",drawG,"Losuju… ještě chvíli…");
+  layer("r_txt",resultG,"Příjemce tvého daru je. Super! Tuhle informaci si nech pro sebe.");
+  var backA=ctl("back",backG,"Zpět na výpis informací",function(){location.href=BACK_URL+"#otevrena";},"a");
+  backA.href=BACK_URL;
+
+  // ---------- nadpisy jmen (s otazníkem / bez) ----------
+  var K=1.11, HEAD={};
+  function headPlace(name,which){var m=META.heads[name],vb=m[which],k=name==="Flori"?1:K,cx=which==="A"?146.4:146.2,base=171.250;
+    var w=vb[2]*k,h=vb[3]*k;return [cx-w/2,base-(m.base-vb[1])*k,w,h];}
+  NAMES.forEach(function(n){var m=META.heads[n];
+    var a=mk("img","",headG);a.src="m/h_"+m.tag+".svg";a.alt=n+"?";a.draggable=false;a.style.visibility="hidden";a.style.pointerEvents="none";pos(a,headPlace(n,"A"));
+    var b=mk("img","",headG);b.src="m/n_"+m.tag+".svg";b.alt=n;b.draggable=false;b.style.visibility="hidden";b.style.pointerEvents="none";pos(b,headPlace(n,"B"));
+    HEAD[n]={A:a,B:b};});
+  function hideHeads(){NAMES.forEach(function(n){HEAD[n].A.style.visibility="hidden";HEAD[n].B.style.visibility="hidden";});}
+  function showHead(n,w,popIt){hideHeads();var e=HEAD[n][w];e.style.visibility="visible";
+    if(popIt&&!reduce){e.classList.remove("pop");void e.getBoundingClientRect();e.classList.add("pop");}}
+
+  // ---------- ilustrace (plovou nahoru a dolů) ----------
+  META.dd.forEach(function(d,i){var el=mk("div","el dd",dood);imgEl("m/"+d[0]+".svg","",el);pos(el,d.slice(1));
+    var r=(Math.sin(i*12.9898)*43758.5453);r=r-Math.floor(r);var r2=(Math.sin(i*78.233)*12345.678);r2=r2-Math.floor(r2);
+    el.style.setProperty("--dur",(6.5+r*4.5).toFixed(2)+"s");
+    el.style.setProperty("--del",(-r2*10).toFixed(2)+"s");
+    el.style.setProperty("--amp",((5+r2*7)*0.3).toFixed(1));
+    el.style.setProperty("--ax",(r*1).toFixed(1));
+    el.style.setProperty("--rot",(1+r2*2.2).toFixed(2)+"deg");});
+
+  // ---------- stav a animace ----------
+  var selected=null,busy=false,state="list",anim=null;
+  function on(el,v){el.classList.toggle("on",v);}
+  function animateCard(kf,opt){if(anim){try{anim.cancel()}catch(e){}}
+    if(reduce){opt.duration=1;}anim=wrap.animate(kf,opt);return anim;}
+  function ask(n){
+    if(busy||state!=="list")return;
+    selected=n;state="confirm";
+    hideHeads();showHead(n,"A",false);HEAD[n].A.style.visibility="hidden";
+    list.classList.add("lock");
+    on(confirmG,false);
+    wrap.style.visibility="visible";
+    var a=animateCard([
+      {transform:"translateY(-104%) rotate(-5deg)",offset:0,easing:"cubic-bezier(.45,.05,.75,.6)"},
+      {transform:"translateY(2.4%) rotate(1.7deg)",offset:.58,easing:"ease-out"},
+      {transform:"translateY(-1.1%) rotate(-.7deg)",offset:.78,easing:"ease-in-out"},
+      {transform:"translateY(0) rotate(0deg)",offset:1}],{duration:1050,fill:"forwards"});
+    var done=function(){if(state!=="confirm"||selected!==n)return;showHead(n,"A",true);on(confirmG,true);};
+    setTimeout(done,reduce?0:700);
+  }
+  function no(){
+    if(state!=="confirm")return;state="list";selected=null;
+    on(confirmG,false);hideHeads();
+    var a=animateCard([{transform:"translateY(0) rotate(0deg)"},{transform:"translateY(-106%) rotate(3.5deg)"}],{duration:650,easing:"cubic-bezier(.5,0,.8,.4)",fill:"forwards"});
+    a.onfinish=function(){if(state==="list"){wrap.style.visibility="hidden";list.classList.remove("lock");}};
+  }
+  function yes(){
+    if(state!=="confirm"||!selected)return;
+    state="draw";busy=true;var me=selected;
+    on(confirmG,false);
+    list.classList.add("off");on(dood,true);on(backG,true);
+    setTimeout(function(){hideHeads();on(drawG,true);reel(me);},reduce?0:380);
+  }
+  function reel(me){
+    var target=reveal(me),pool=NAMES.filter(function(n){return n!==me;}),total=reduce?600:7500,start=Date.now(),last="";
+    (function tick(){
+      var t=(Date.now()-start)/total;
+      if(t>=1){finish();return;}
+      var p;do{p=pool[Math.floor(Math.random()*pool.length)];}while(p===last&&pool.length>1);
+      last=p;showHead(p,"B",false);
+      setTimeout(tick,70+330*t*t);
+    })();
+    function finish(){
+      showHead(target,"B",true);
+      setTimeout(function(){on(drawG,false);on(resultG,true);state="result";},reduce?0:350);
+    }
+  }
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")no();});
+  addEventListener("resize",layout);layout();
+})();
+</script>
+<script>addEventListener('pageshow',function(e){if(e.persisted)location.reload()})</script></body>
+</html>

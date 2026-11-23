@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kamarádské Vánoce</title>
+<style>
+html,body{margin:0;background:#2c6552}
+#bands{width:100%;overflow-x:clip}
+body{overflow-x:hidden}
+.opened #bands{background:linear-gradient(#2c6552 0 26.52%,#f2e9de 26.52% 98.5%,#2c6552 98.5%)}
+html.lock,html.lock body{overflow:hidden;height:100%}
+#world{position:relative;width:120vw;margin:0 -10vw;aspect-ratio:292.5/1387.5;transform-origin:0 0}
+#world img.bg,#world .tx{position:absolute;display:block;pointer-events:none}
+#world img.bg{left:-13.6752%;top:0;width:127.3504%;height:100%}
+#page,.tx,.cta{visibility:hidden}
+.opened #page,.opened .tx,.opened .cta{visibility:visible}
+#scene{position:absolute;left:0;top:0;width:100%;height:auto;aspect-ratio:292.5/525;overflow:visible}
+#scene image{pointer-events:none}
+#scene *{transform-box:view-box}
+#openflap{transform-origin:0 138.5px;transform:scaleY(0)}
+#closedflap{transform-origin:0 138.5px}
+#letter{transform:translateY(300px)}
+#title{transition:opacity .45s}
+#hot{outline:none;cursor:pointer;fill:transparent;pointer-events:all}
+#envg.shake{animation:shake .55s ease-in-out}
+@keyframes shake{0%,100%{transform:rotate(0)}15%{transform:translateX(-5px) rotate(-1.8deg)}35%{transform:translateX(5px) rotate(1.8deg)}55%{transform:translateX(-4px) rotate(-1.2deg)}75%{transform:translateX(3px) rotate(.8deg)}}
+.cta{position:absolute;left:38.9744%;top:73.5135%;width:24.6154%;transition:transform .25s cubic-bezier(.3,1.6,.5,1);display:block;transform-origin:50% 50%}
+.cta img{width:100%;display:block}
+.cta:hover,.cta:focus-visible{transform:scale(1.14)}
+@media (prefers-reduced-motion:reduce){#envg.shake{animation:none}.cta{transition:none}}
+#rst{visibility:hidden;opacity:0}.opened #rst{visibility:visible;opacity:.92;transition:opacity .8s 2s}</style></head>
+<body>
+<div id="bands"><div id="world">
+<img class="bg" id="page" src="m/pagewide.svg" alt="">
+<img class="tx" data-src="m/t753.svg" data-dur="4.74" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:20.0000%;top:50.7387%;width:46.1538%;aspect-ratio:135.00/53.50">
+<img class="tx" data-src="m/t764.svg" data-dur="3.79" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:28.3761%;top:20.2883%;width:41.5385%;aspect-ratio:121.50/38.50">
+<img class="tx" data-src="m/t765.svg" data-dur="3.03" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:25.1282%;top:29.1892%;width:46.4957%;aspect-ratio:136.00/31.50">
+<img class="tx" data-src="m/t766.svg" data-dur="4.74" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:23.4188%;top:39.1351%;width:50.9402%;aspect-ratio:149.00/56.50">
+<img class="tx" data-src="m/t767.svg" data-dur="4.75" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:21.1966%;top:64.4324%;width:53.6752%;aspect-ratio:157.00/60.00">
+<img class="tx" data-src="m/t768.svg" data-dur="4.76" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:22.0513%;top:77.8018%;width:52.6496%;aspect-ratio:154.00/84.00">
+<img class="tx" data-src="m/t769.svg" data-dur="2.08" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:13.3333%;top:68.8649%;width:31.1111%;aspect-ratio:91.00/25.50">
+<img class="tx" data-src="m/t770.svg" data-dur="4.65" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:37.6068%;top:83.4234%;width:42.5641%;aspect-ratio:124.50/46.50">
+<img class="tx" data-src="m/t771.svg" data-dur="2.60" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:54.0171%;top:55.7117%;width:17.7778%;aspect-ratio:52.00/29.00">
+<img class="tx" data-src="m/t772.svg" data-dur="4.65" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:37.7778%;top:44.7568%;width:44.9573%;aspect-ratio:131.50/57.50">
+<img class="tx" data-src="m/t773.svg" data-dur="3.52" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:33.8462%;top:71.6396%;width:45.9829%;aspect-ratio:134.50/33.50">
+<img class="tx" data-src="m/t776.svg" data-dur="4.74" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:27.1795%;top:33.7658%;width:48.3761%;aspect-ratio:141.50/45.00">
+<img class="tx" data-src="m/t778.svg" data-dur="3.16" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:24.6154%;top:92.7568%;width:50.5983%;aspect-ratio:148.00/25.00">
+<img class="tx" data-src="m/t779.svg" data-h="1" data-dur="0.60" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="left:45.9829%;top:96.1802%;width:9.5726%;aspect-ratio:28.00/12.50">
+<a class="cta" id="cta" href="los/"><img src="m/cta.svg" alt="Sláva! Tajný ježíšek"></a>
+<svg id="scene" viewBox="0 0 292.5 525" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs><clipPath id="iclip"><rect id="irect" x="0" y="140" width="292.5" height="106.5"/></clipPath><clipPath id="lclip"><polygon points="0,0 0,138.5 0.0,138.5 1.2,138.5 2.4,138.5 3.6,138.5 4.8,138.5 6.0,138.5 7.2,138.5 8.4,138.5 9.6,138.5 10.8,138.5 12.0,138.5 13.2,138.5 14.4,138.5 15.6,138.5 16.8,138.5 18.0,138.5 19.2,138.5 20.4,138.5 21.6,138.5 22.8,138.5 24.0,138.5 25.2,138.5 26.4,138.5 27.6,138.5 28.8,138.5 30.0,138.5 31.2,138.5 32.4,138.5 33.6,138.5 34.8,138.5 36.0,138.5 37.2,138.5 38.4,138.5 39.6,138.5 40.8,138.5 42.0,138.5 43.2,138.5 44.4,138.5 45.6,138.5 46.8,138.5 48.0,138.5 49.2,138.5 50.4,138.5 51.6,138.5 52.8,138.5 54.0,138.5 55.2,138.5 56.4,138.5 57.6,138.5 58.8,138.5 60.0,138.5 61.2,138.5 62.4,138.5 63.6,138.5 64.8,138.5 66.0,139.1 67.2,139.4 68.4,139.8 69.6,140.1 70.8,140.4 72.0,140.8 73.2,141.1 74.4,141.5 75.6,141.8 76.8,142.1 78.0,142.6 79.2,143.0 80.4,143.5 81.6,144.1 82.8,144.8 84.0,145.4 85.2,146.1 86.4,146.9 87.6,147.8 88.8,148.6 90.0,149.5 91.2,150.2 92.4,151.2 93.6,152.0 94.8,152.9 96.0,153.9 97.2,154.6 98.4,155.5 99.6,156.4 100.8,157.2 102.0,158.1 103.2,158.9 104.4,159.8 105.6,160.6 106.8,161.5 108.0,162.4 109.2,163.2 110.4,164.1 111.6,164.9 112.8,165.9 114.0,166.8 115.2,167.5 116.4,168.4 117.6,169.2 118.8,170.1 120.0,171.0 121.2,171.9 122.4,172.8 123.6,173.5 124.8,174.5 126.0,175.4 127.2,176.1 128.4,177.0 129.6,177.9 130.8,178.8 132.0,178.8 133.2,178.8 134.4,178.8 135.6,178.8 136.8,178.8 138.0,178.8 139.2,178.8 140.4,178.8 141.6,178.8 142.8,178.8 144.0,178.8 145.2,178.8 146.4,178.8 147.6,178.8 148.8,178.8 150.0,178.8 151.2,178.8 152.4,178.8 153.6,178.8 154.8,178.8 156.0,178.8 157.2,178.8 158.4,178.8 159.6,178.8 160.8,178.8 162.0,178.8 163.2,178.8 164.4,178.8 165.6,178.0 166.8,177.1 168.0,176.2 169.2,175.4 170.4,174.5 171.6,173.6 172.8,172.8 174.0,172.0 175.2,171.0 176.4,170.1 177.6,169.4 178.8,168.5 180.0,167.6 181.2,166.8 182.4,165.9 183.6,165.0 184.8,164.1 186.0,163.4 187.2,162.4 188.4,161.5 189.6,160.8 190.8,159.9 192.0,159.0 193.2,158.1 194.4,157.2 195.6,156.5 196.8,155.5 198.0,154.8 199.2,153.9 200.4,152.9 201.6,152.1 202.8,151.2 204.0,150.4 205.2,149.5 206.4,148.6 207.6,147.9 208.8,147.0 210.0,146.1 211.2,145.5 212.4,144.8 213.6,144.1 214.8,143.6 216.0,143.1 217.2,142.6 218.4,142.1 219.6,141.8 220.8,141.5 222.0,141.1 223.2,140.8 224.4,140.5 225.6,140.1 226.8,139.9 228.0,139.5 229.2,139.1 230.4,138.5 231.6,138.5 232.8,138.5 234.0,138.5 235.2,138.5 236.4,138.5 237.6,138.5 238.8,138.5 240.0,138.5 241.2,138.5 242.4,138.5 243.6,138.5 244.8,138.5 246.0,138.5 247.2,138.5 248.4,138.5 249.6,138.5 250.8,138.5 252.0,138.5 253.2,138.5 254.4,138.5 255.6,138.5 256.8,138.5 258.0,138.5 259.2,138.5 260.4,138.5 261.6,138.5 262.8,138.5 264.0,138.5 265.2,138.5 266.4,138.5 267.6,138.5 268.8,138.5 270.0,138.5 271.2,138.5 272.4,138.5 273.6,138.5 274.8,138.5 276.0,138.5 277.2,138.5 278.4,138.5 279.6,138.5 280.8,138.5 282.0,138.5 283.2,138.5 284.4,138.5 285.6,138.5 286.8,138.5 288.0,138.5 289.2,138.5 290.4,138.5 291.6,138.5 292.5,138.5 292.5,0"/></clipPath></defs>
+<g id="envg">
+ <image id="openflap" href="m/openflap.svg" width="292.5" height="525"/>
+ <g clip-path="url(#iclip)"><image id="inside" href="m/inside.svg" width="292.5" height="525"/></g>
+ <g clip-path="url(#lclip)"><image id="letter" href="m/letter.svg" width="292.5" height="525"/></g>
+ <image id="mid" href="m/mid.svg" width="292.5" height="525"/>
+ <image id="front" href="m/front.svg" width="292.5" height="525"/>
+ <image id="closedflap" href="m/closedflap.svg" width="292.5" height="525"/>
+</g>
+<image id="title" href="m/title.svg" width="292.5" height="525"/>
+<rect id="hot" x="62" y="132" width="172" height="120" tabindex="0" role="button" aria-label="Otevřít pozvánku"/>
+</svg>
+</div></div>
+<script>
+(function(){
+var html=document.documentElement,world=document.getElementById('world'),hot=document.getElementById('hot'),envg=document.getElementById('envg');
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,opened=false;
+html.classList.add('lock');
+var SX=0.63080,SY=0.62784,TX=55.4072,TY=27.6690,FW=292.5*SX,FH=525*SY;
+function cam(){var vw=innerWidth,vh=innerHeight,k=world.offsetWidth/292.5,L=world.offsetLeft,s=Math.min(vw/FW,vh/FH)/k;
+ var cx=TX+FW/2,cy=TY+FH/2;return {s:s,x:vw/2-L-cx*k*s,y:vh/2-cy*k*s}}
+function setCam(){if(opened)return;var c=cam();world.style.transform='translate('+c.x+'px,'+c.y+'px) scale('+c.s+')';}
+setCam();addEventListener('resize',setCam);
+function shake(){if(opened)return;envg.classList.remove('shake');void envg.getBoundingClientRect();envg.classList.add('shake');}
+hot.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')shake()});
+envg.addEventListener('animationend',function(){envg.classList.remove('shake')});
+var hint=setInterval(function(){if(!opened&&matchMedia('(hover:none)').matches)shake()},4500);
+function ease(el,prop,from,to,dur,delay,easing,fill){
+ return el.animate([{[prop]:from},{[prop]:to}],{duration:reduce?1:dur,delay:reduce?0:delay,easing:easing||'ease',fill:'forwards'});}
+function open(){
+ if(opened)return;opened=true;try{sessionStorage.setItem('kv_open','1');localStorage.setItem('kv_open','1')}catch(e){}clearInterval(hint);envg.classList.remove('shake');hot.style.pointerEvents='none';
+ html.classList.add('opened');
+ var c=cam(),D=reduce?1:1;
+ var pg=function(){};
+ world.animate([{transform:world.style.transform},{transform:'translate(0px,0px) scale(1)'}],{duration:reduce?1:1000,easing:'cubic-bezier(.65,0,.35,1)',fill:'forwards'}).finished.then(function(){world.style.transform='none'});
+ document.getElementById('title').style.opacity=0;
+ var T=reduce?0:1;
+ setTimeout(function(){
+  ease(document.getElementById('closedflap'),'transform','scaleY(1)','scaleY(0)',360,0,'ease-in');
+  ease(document.getElementById('openflap'),'transform','scaleY(0)','scaleY(1)',360,330,'ease-out');
+  setTimeout(function(){var r=document.getElementById('irect');r.setAttribute('y','0');r.setAttribute('height','246.4')},reduce?0:420);
+ },reduce?0:450);
+ setTimeout(function(){
+  var a=ease(document.getElementById('letter'),'transform','translateY(300px)','translateY(0px)',1300,0,'cubic-bezier(.22,.8,.3,1)');
+  a.finished.then(function(){html.classList.remove('lock');initText();});
+ },reduce?0:1250);
+}
+hot.addEventListener('click',open);
+hot.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+var tx=[].slice.call(document.querySelectorAll('.tx')),started=false;
+var done={};try{done=JSON.parse(localStorage.getItem('kv_done')||'{}')}catch(e){}
+function stat(im){return im.dataset.src.replace(/(^|\/)t(\d+)\.svg/,'$1s$2.svg')}
+function fin(im,st,d){setTimeout(function(){var ok=function(){im.src=st.src;done[im.dataset.src]=1;try{localStorage.setItem('kv_done',JSON.stringify(done))}catch(e){}};(st.decode?st.decode().then(ok,ok):ok())},d)}
+function play(im){var d=reduce?50:parseFloat(im.dataset.dur)*1000+300;
+  if(done[im.dataset.src]){im.src=stat(im);return}
+  var st=new Image();st.src=stat(im);
+  im.onload=function(){im.onload=null;fin(im,st,d)};
+  im.src=im.dataset.src+'?r='+Date.now();}
+function initText(){
+ if(started)return;started=true;
+ function go(im){if(im._s)return;im._s=1;io.unobserve(im);
+  if(!done[im.dataset.src]&&im.dataset.h&&!reduce)im.animate([{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)'}],{duration:parseFloat(im.dataset.dur)*1000-120,easing:'linear',fill:'both'});
+  play(im)}
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go(e.target)})},{rootMargin:'0px 0px -9% 0px',threshold:.1});
+ tx.forEach(function(im){io.observe(im)});
+ addEventListener('scroll',function(){if(innerHeight+scrollY>=document.documentElement.scrollHeight-6)tx.forEach(go)},{passive:true});
+}
+
+function openInstant(){
+ opened=true;clearInterval(hint);hot.style.pointerEvents='none';html.classList.add('opened');html.classList.remove('lock');
+ world.style.transform='none';document.getElementById('title').style.opacity=0;
+ document.getElementById('closedflap').style.transform='scaleY(0)';document.getElementById('openflap').style.transform='scaleY(1)';
+ var ir=document.getElementById('irect');ir.setAttribute('y','0');ir.setAttribute('height','246.4');document.getElementById('letter').style.transform='translateY(0px)';initText();
+}
+var was=false;try{was=localStorage.getItem('kv_open')==='1'||sessionStorage.getItem('kv_open')==='1'}catch(e){}
+if(was||location.hash==='#otevrena')openInstant();
+// předehřátí cache (animace se pak spustí hned po zobrazení)
+
+})();
+</script>
+<button id="rst" aria-label="Spustit znovu" title="Spustit znovu" style="position:fixed;left:22px;bottom:24px;z-index:99;width:112px;padding:0;border:0;background:none;cursor:pointer"><img src="restart.svg" alt="Spustit znovu" style="width:100%;display:block;pointer-events:none"></button>
+<script>document.getElementById('rst').onclick=function(){try{localStorage.removeItem('kv_open');localStorage.removeItem('kv_done');sessionStorage.removeItem('kv_open')}catch(e){}history.replaceState(null,'',location.pathname+location.search);location.reload()}</script>
+</body></html>
